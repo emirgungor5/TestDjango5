@@ -1,0 +1,8 @@
+Django==5.0.3
+djangorestframework
+timedelta
+automium_web
+django-timedeltafield
+pymysql
+djangorestframework-simplejwt
+django-environ
