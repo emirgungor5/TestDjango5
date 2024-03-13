@@ -9,6 +9,7 @@ from .serializers import UserProfileSerializer
 
 class RegisterUserView(APIView):
     parser_classes = [JSONParser, MultiPartParser, FormParser]
+
     def post(self, request):
         # if email is already in use
         if UserProfile.objects.filter(email=request.data['email']).exists():
@@ -20,6 +21,7 @@ class RegisterUserView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class UserView(APIView):
     permission_classes = (IsAuthenticated,)
@@ -36,6 +38,7 @@ class UserView(APIView):
         user.save()
         return Response({'message': 'Image updated'}, status=status.HTTP_200_OK)
 
+
 class AllUsersView(APIView):
     permission_classes = (IsAuthenticated,)
 
@@ -43,3 +46,5 @@ class AllUsersView(APIView):
         users = UserProfile.objects.all()
         serializer = UserProfileSerializer(users, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
